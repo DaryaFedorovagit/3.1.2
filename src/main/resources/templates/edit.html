@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<h1> Edit User</h1>
+<form th:method="post" th:action="@{/admin/edit(id=${user.getId()})}"
+      th:object="${user}">
+    <label for="username">Username: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    </br>
+    </br>
+    <label for="password">Password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    </br>
+    </br>
+    <label for="age">Age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    </br>
+    </br>
+    <label> Select role:
+        <input type="checkbox" name="roles"
+               th:each="roles : ${role}"
+               th:value="${roles.getId()}"
+               th:text="${roles.getName().replace('ROLE_', '') + ' '}"
+               th:field="*{roles}"
+        />
+    </label>
+    <br>
+    <input type="submit" value="Update"/>
+</form>
+<br>
+<form th:action="@{/logout}" method="get">
+    <input type="submit" value="Logout"/>
+</form>
+</body>
+</html>

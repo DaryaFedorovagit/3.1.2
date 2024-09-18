@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>User</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: auto;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+<h1>Hello, user </h1>
+<table th:border="1" th:cellpadding="5">
+
+    <tr>
+        <th>Username</th>
+        <th>Age</th>
+        <th>Role</th>
+    </tr>
+    <tr th:each="user : ${user}">
+        <td th:text="${user.getUsername()}">username</td>
+        <td th:text="${user.getAge()}">age</td>
+        <td>
+            <ul th:each="role: ${user.getRoles()}" th:text="${role.getName().replace('ROLE_', '') + ' '}">role</ul>
+        </td>
+    </tr>
+</table>
+<br>
+<form th:action="@{/logout}" method="get">
+    <input type="submit" value="Logout"/>
+</form>
+</body>
+</html>
